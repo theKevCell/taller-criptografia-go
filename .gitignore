@@ -1,0 +1,12 @@
+# Ejecutables y archivos temporales
+*.exe
+*.test
+*.out
+
+# Configuración local del editor
+.vscode/
+
+# Variables de entorno y claves privadas
+.env
+*.key
+*.pem
