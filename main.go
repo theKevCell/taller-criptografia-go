@@ -78,11 +78,13 @@ func run() error {
 	fmt.Printf("SHA-256 descifrado: %s\n", result.DecryptedHash)
 	fmt.Printf("\nComparación de integridad: %s\n", result.IntegrityMessage)
 	fmt.Println("\nArchivos generados:")
-	fmt.Printf("  Original:   %s\n", result.OriginalPath)
-	fmt.Printf("  Cifrado:    %s\n", result.EncryptedPath)
-	fmt.Printf("  Nonce:      %s\n", result.NoncePath)
-	fmt.Printf("  Descifrado: %s\n", result.DecryptedPath)
-	fmt.Printf("  Clave:      %s\n", result.KeyPath)
+	fmt.Printf("  Original:         %s\n", result.OriginalPath)
+	fmt.Printf("  Hash original:    %s\n", result.OriginalHashPath)
+	fmt.Printf("  Cifrado:          %s\n", result.EncryptedPath)
+	fmt.Printf("  Hash cifrado:     %s\n", result.EncryptedHashPath)
+	fmt.Printf("  Nonce:            %s\n", result.NoncePath)
+	fmt.Printf("  Descifrado:       %s\n", result.DecryptedPath)
+	fmt.Printf("  Clave:            %s\n", result.KeyPath)
 
 	return nil
 }

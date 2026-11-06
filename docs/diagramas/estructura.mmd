@@ -1,0 +1,42 @@
+---
+title: "Diagrama de estructura · módulo taller-criptografia-go (flecha sólida = import)"
+---
+flowchart TB
+    usuario(["Usuario en la terminal"])
+
+    cli["<b>main.go</b> · package main<br/>menú y validación · Paso 1<br/>reporte de resultados · Paso 10"]
+    ed["<b>cmd/events-demo</b><br/>demo del generador"]
+    app["<b>internal/app</b><br/>RunWorkflow → Result<br/>orquesta los Pasos 2 a 9<br/>guardarHash · leerHash"]
+    cd["<b>cmd/crypto-demo</b><br/>demo de cifrado y<br/>alteración de 1 bit"]
+    evt["<b>internal/events</b><br/>Event · Log · GradeRecord<br/>GenerateLog · SaveJSON"]
+    hsh["<b>hashing</b><br/>CalcularHashPayload<br/>CalcularHashArchivo<br/>CompararHashes"]
+    cry["<b>cryptography</b><br/>AES-256-GCM<br/>ObtenerClave<br/>CifrarArchivo<br/>DescifrarArchivo"]
+
+    huh[["<b>charmbracelet/huh</b><br/>librería de terceros<br/>para terminal"]]
+    stdlib[["<b>Biblioteca estándar de Go</b><br/>crypto/sha256 · crypto/aes<br/>crypto/cipher · crypto/rand<br/>encoding/json · encoding/hex<br/>math/rand · os"]]
+    disco[("<b>outputs/</b><br/>log_original.json<br/>hash_original.sha256<br/>log_cifrado.bin · .nonce<br/>hash_cifrado.sha256<br/>log_descifrado.json<br/>clave.key")]
+
+    usuario --> cli
+    cli --> huh
+    cli --> app
+    app --> evt
+    app --> hsh
+    app --> cry
+    ed --> evt
+    cd --> hsh
+    cd --> cry
+    evt --> stdlib
+    hsh --> stdlib
+    cry --> stdlib
+    app -. "escribe y lee archivos<br/>(directo y vía events · cryptography)" .-> disco
+
+    classDef propio fill:#E6F7FB,stroke:#0891B2,stroke-width:1.5px,color:#0B1220
+    classDef orquestador fill:#CCEFF7,stroke:#0E7490,stroke-width:2.5px,color:#0B1220
+    classDef demo fill:#F8FAFC,stroke:#64748B,stroke-width:1.2px,stroke-dasharray:4 3,color:#0B1220
+    classDef externo fill:#F3EEFF,stroke:#7C3AED,stroke-width:1.5px,color:#0B1220
+    classDef almacen fill:#F1F5F9,stroke:#475569,stroke-width:1.5px,color:#0B1220
+    class cli,evt,hsh,cry propio
+    class app orquestador
+    class ed,cd demo
+    class huh,stdlib externo
+    class disco almacen

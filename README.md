@@ -12,10 +12,21 @@ go run .
 ```
 
 Selecciona **Ejecutar flujo completo** e ingresa una cantidad positiva de
-eventos. La aplicación calcula el hash SHA-256 individual de cada evento,
-genera `outputs/log_original.json`, lo cifra, lo descifra y compara los hashes
-del original y del archivo recuperado. También muestra la cantidad por tipo
-de evento y el hash del archivo cifrado.
+eventos. La aplicación calcula el hash SHA-256 individual de cada evento y
+genera `outputs/log_original.json`. Justo antes de cifrarlo guarda su hash en
+`outputs/hash_original.sha256` (paso 5) y, justo después de cifrar, guarda el
+hash del cifrado en `outputs/hash_cifrado.sha256` (paso 7). Luego descifra el
+log y compara su hash con el guardado en el paso 5. También muestra la
+cantidad por tipo de evento y las rutas de todos los artefactos.
+
+Los archivos de hash usan el formato de `sha256sum`, así que se pueden
+verificar con herramientas estándar:
+
+```sh
+cd outputs && sha256sum -c hash_original.sha256 hash_cifrado.sha256
+```
+
+Los diagramas de estructura y de comportamiento están en `docs/diagramas/`.
 
 La clave se guarda en `outputs/clave.key` con permisos restringidos y se
 reutiliza en ejecuciones posteriores. No compartas esa clave: es necesaria

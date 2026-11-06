@@ -52,6 +52,8 @@ AES-256-GCM es un cifrado autenticado (AEAD). Combina dos componentes:
 | `outputs/log_cifrado.nonce` | Nonce en hexadecimal (24 caracteres). | No |
 | `outputs/clave.key` | Clave en hexadecimal (64 caracteres). | **Sí** |
 | `outputs/log_descifrado.json` | Log recuperado, idéntico al original. | **Sí** |
+| `outputs/hash_original.sha256` | SHA-256 del log en claro, calculado justo antes de cifrar (paso 5). Formato `sha256sum`. | No |
+| `outputs/hash_cifrado.sha256` | SHA-256 del log cifrado, calculado justo después de cifrar (paso 7). Formato `sha256sum`. | No |
 
 Cada ejecución sobrescribe el cifrado y su nonce, que siempre van juntos: uno sin el otro no sirve para descifrar.
 
